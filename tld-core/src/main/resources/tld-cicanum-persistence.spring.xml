@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- PooledDataSource-->
+    <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${tld-cicanum.jdbc.driver}"/>
+        <property name="jdbcUrl" value="${tld-cicanum.jdbc.url}"/>
+        <property name="user" value="${tld-cicanum.jdbc.username}"/>
+        <property name="password" value="${tld-cicanum.jdbc.password}"/>
+
+        <!-- these are C3P0 properties -->
+        <property name="testConnectionOnCheckout" value="true" />
+        <property name="testConnectionOnCheckin" value="false" />
+        <property name="preferredTestQuery" value="select 1"/>
+        <property name="idleConnectionTestPeriod" value="3600"/>
+
+        <property name="checkoutTimeout" value="1000"/>
+        <property name="initialPoolSize" value="10"/>
+        <property name="minPoolSize" value="10" />
+        <property name="acquireIncrement" value="5" />
+        <property name="maxPoolSize" value="100" />
+        <property name="maxIdleTime" value="43200"/>
+        <property name="maxIdleTimeExcessConnections" value="300" />
+    </bean>
+
+
+    <!-- Session Factory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="pooledDataSource"/>
+        <property name="packagesToScan" value="cr.ac.ucr.cicanum.tld.core"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${tld-cicanum.hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Exceptions processor -->
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <!-- Transaction Template-->
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+</beans>

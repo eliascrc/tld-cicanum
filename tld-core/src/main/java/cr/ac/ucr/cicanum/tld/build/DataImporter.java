@@ -5,14 +5,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class DataImporter {
 
-    final ClassPathXmlApplicationContext context;
+    private final ClassPathXmlApplicationContext context;
 
-    DataImporter(){
-        this.context = new ClassPathXmlApplicationContext("talent-core.spring.xml");
+    private DataImporter(){
+        this.context = new ClassPathXmlApplicationContext("tld-cicanum-core.spring.xml");
     }
 
-    void importData(){
+    private void importData(){
         TestBean obj = (TestBean) this.context.getBean("testBean");
+        System.out.println(obj.getMessage());
     }
 
     public static void main(String[] args) {
