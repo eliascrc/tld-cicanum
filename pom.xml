@@ -10,6 +10,8 @@
     <version>0.1</version>
     <name>tld-cicanum</name>
 
+    <url>https://github.com/eliascrc/tld-cicanum</url>
+
     <developers>
         <developer>
             <id>elias.calderon</id>
