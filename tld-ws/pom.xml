@@ -101,7 +101,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <path>/talent</path>
+                    <path>/tld-cicanum</path>
                 </configuration>
             </plugin>
         </plugins>
