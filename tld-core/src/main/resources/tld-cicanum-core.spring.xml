@@ -19,7 +19,8 @@
     <bean id="rootPlaceholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-
+                <value>classpath:tld-cicanum.properties</value>
+                <value>file:${user.home}/tld-cicanum/tld-cicanum.properties</value>
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true"/>

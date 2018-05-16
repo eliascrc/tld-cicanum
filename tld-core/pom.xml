@@ -24,6 +24,19 @@
         <!-- Spring Version -->
         <spring.version>4.3.13.RELEASE</spring.version>
 
+        <!--JDBC properties -->
+        <jdbc.schema>tld-cicanum</jdbc.schema>
+        <jdbc.base.url>jdbc:mysql://${jdbc.host}:3306/${jdbc.schema}</jdbc.base.url>
+        <jdbc.url>${jdbc.base.url}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</jdbc.url>
+        <jdbc.base.url.noschema>jdbc:mysql://${jdbc.host}:3306</jdbc.base.url.noschema>
+        <jdbc.username>tld-hibernate</jdbc.username>
+        <jdbc.password>dosi.FQR!287</jdbc.password>
+        <jdbc.host>localhost</jdbc.host>
+        <jdbc.driver>com.mysql.cj.jdbc.Driver</jdbc.driver>
+
+        <!--Hibernate properties -->
+        <hibernate.dialect>org.hibernate.dialect.MySQL57InnoDBDialect</hibernate.dialect>
+
     </properties>
 
     <build>
@@ -35,6 +48,7 @@
         </resources>
 
         <plugins>
+            <!-- Maven Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -42,6 +56,16 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!-- Hibernate Plugin -->
+            <plugin>
+                <groupId>de.juplo</groupId>
+                <artifactId>hibernate-maven-plugin</artifactId>
+                <version>2.1.0</version>
+                <configuration>
+                    <show>true</show>
                 </configuration>
             </plugin>
 
@@ -96,6 +120,47 @@
             <groupId>aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>1.5.4</version>
+        </dependency>
+
+        <!-- JDBC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.0.4.RELEASE</version>
+        </dependency>
+
+        <!-- MySQL-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.9-rc</version>
+        </dependency>
+
+        <!--Hibernate-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.15.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>5.2.15.Final</version>
+        </dependency>
+
+        <!-- C3P0 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>5.2.15.Final</version>
+        </dependency>
+
+        <!--Spring-ORM module-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>5.0.4.RELEASE</version>
         </dependency>
 
     </dependencies>
