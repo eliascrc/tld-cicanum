@@ -3,21 +3,17 @@ package cr.ac.ucr.cicanum.tld.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "encargado_ccss")
-public class CcssManager extends User {
+@Table(name = "encargado_servicio")
+public class ServiceManager extends User {
 
-    //TODO Poner referencia a Hospital, implement onHashcode and onEquals
+    //TODO implement onHashcode and onEquals, refeference to service
 
     @Override
     protected boolean onEquals(Object o) {
@@ -29,15 +25,14 @@ public class CcssManager extends User {
         return 0;
     }
 
-    public CcssManager() {
+    public ServiceManager() {
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final Set<GrantedAuthority> authorities = new HashSet<>(super.getAuthorities());
         if (this.enabled)
-            authorities.add(new SimpleGrantedAuthority("ROLE_CCSS_MANAGER"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_SERVICE_MANAGER"));
         return authorities;
     }
-
 }
