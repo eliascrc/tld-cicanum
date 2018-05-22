@@ -1,6 +1,11 @@
 package cr.ac.ucr.cicanum.tld.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 /**
  * Represents a set of constants given by equipment and dosimeter type to perform dosage calculations.
