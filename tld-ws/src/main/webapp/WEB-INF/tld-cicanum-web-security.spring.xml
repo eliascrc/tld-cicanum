@@ -7,5 +7,6 @@
 		http://www.springframework.org/schema/security/spring-security.xsd"
        default-init-method="init">
 
+    <security:http use-expressions="false" pattern="/**/*" auto-config="true"/>
 
 </beans>

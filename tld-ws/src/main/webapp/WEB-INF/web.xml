@@ -5,6 +5,16 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         id="WebApp_ID" version="3.0">
 
+    <!-- Spring Security Filter -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- Mappings -->
     <servlet-mapping>
         <servlet-name>tld-cicanum-ws-mvc.spring</servlet-name>
@@ -30,13 +40,10 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/tld-cicanum-ws.spring.xml <!--/WEB-INF/tld-cicanum-web-security.spring.xml-->
+            /WEB-INF/tld-cicanum-ws.spring.xml /WEB-INF/tld-cicanum-web-security.spring.xml
             classpath:tld-cicanum-core.spring.xml,
             classpath:tld-cicanum-persistence.spring.xml,
-            <!-- Will be needed later on
-            classpath:tld-cicanum-security.spring.xml,
-            classpath:tld-cicanum-mail.spring.xml
-            -->
+            classpath:tld-cicanum-security.spring.xml
         </param-value>
     </context-param>
 
@@ -49,11 +56,21 @@
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>cr.tld-cicanum.ws</param-value>
         </init-param>
-        <init-param>
-            <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
-            <param-value>cr.tld-cicanum.ws.rest.support.CORSFilter</param-value>
-        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <!-- Context Loader -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!-- Request Listener -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
 
 </web-app>
