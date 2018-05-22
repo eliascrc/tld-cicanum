@@ -3,10 +3,11 @@ package cr.ac.ucr.cicanum.tld.support;
 /**
  * Class which provides security utils such as validating a user's password.
  *
- * @author Josué León Sarkis
+ * @author Roberto Leandro
  */
 public class SecurityUtils {
 
+    // TODO Preguntarle a Jonatan sobre los requerimientos de la contraseña
     /**
      * Method which validades a user's password by checking it is at least 8 characters long,
      * it has at least one: number, upper case letter, lower case letter and symbol.

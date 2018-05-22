@@ -9,26 +9,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Class that represents a CCSS Manager within the TLD system.
- * It contains the reference to public hospitals and the information inherited from
+ * Class that represents a Service Manager within the TLD system.
+ * It contains the reference to the user's services and the information inherited from
  * {@link cr.ac.ucr.cicanum.tld.model.User}
  *
  * @author Elías Calderón
  */
 @Entity
-@DiscriminatorValue(value = "CCSS_MANAGER")
-public class CcssManager extends User {
+@DiscriminatorValue(value = "SERVICE_MANAGER")
+public class ServiceManager extends User {
 
-    //TODO Poner referencia a Hospitales publicos
+    //TODO Poner referencia a Servicios encargados
 
-    public CcssManager() {
+    public ServiceManager () {
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final Set<GrantedAuthority> authorities = new HashSet<>(super.getAuthorities());
         if (this.enabled)
-            authorities.add(new SimpleGrantedAuthority("ROLE_CCSS_MANAGER"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_SERVICE_MANAGER"));
         return authorities;
     }
 

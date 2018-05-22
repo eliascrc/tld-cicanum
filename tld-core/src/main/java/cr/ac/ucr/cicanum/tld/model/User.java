@@ -4,10 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.HashSet;
@@ -17,9 +14,13 @@ import java.util.Set;
  * Class that represents a user within the TLD system.
  * It contains the username, password, email, flags, phone number and the information inherited from
  * {@link cr.ac.ucr.cicanum.tld.model.BasicEntity} class and {@link UserDetails} interface.
+ *
+ * @author Elías Calderón
  */
-@MappedSuperclass
-public abstract class User extends BasicEntity implements UserDetails {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "usuario")
+public class User extends BasicEntity implements UserDetails {
 
     /**
      * Username can't be empty, null or duplicated. It represents the user's email address.
@@ -89,7 +90,7 @@ public abstract class User extends BasicEntity implements UserDetails {
     protected Timestamp last_login;
 
     /**
-     * The user type
+     * The user's type
      */
     @Enumerated
     @Column(name = "tipo_usuario", nullable = false)
