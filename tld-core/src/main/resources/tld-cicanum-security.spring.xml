@@ -9,8 +9,28 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="cr.ac.ucr.cicanum.tld.core"/>
+
     <bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
         <constructor-arg index="0" value="z0Dq65m!HfRMKT"/>
+    </bean>
+
+    <bean id="ccssManagerAuthenticationProvider"
+          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="ccssManagerService"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>
+    </bean>
+
+    <bean id="serviceManagerAuthenticationProvider"
+          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="serviceManagerService"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>
+    </bean>
+
+    <bean id="cicanumUserAuthenticationProvider"
+          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="cicanumUserService"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>
     </bean>
 
 </beans>

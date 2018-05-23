@@ -16,7 +16,7 @@ import java.util.Set;
  * @author Elías Calderón
  */
 @Entity
-@DiscriminatorValue(value = "CCSS_MANAGER")
+@Table(name = "encargado_ccss")
 public class CcssManager extends User {
 
     //TODO Poner referencia a Hospitales publicos

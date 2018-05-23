@@ -14,7 +14,7 @@ import java.util.Set;
  * {@link cr.ac.ucr.cicanum.tld.model.User}
  */
 @Entity
-@DiscriminatorValue(value = "CICANUM_USER")
+@Table(name = "usuario_cicanum")
 public class CicanumUser extends User {
 
     /**

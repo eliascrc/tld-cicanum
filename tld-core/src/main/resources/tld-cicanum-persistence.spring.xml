@@ -37,7 +37,7 @@
     <!-- Session Factory -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="pooledDataSource"/>
-        <property name="packagesToScan" value="cr.ac.ucr.cicanum.tld.core"/>
+        <property name="packagesToScan" value="cr.ac.ucr.cicanum.tld.model"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${tld-cicanum.hibernate.dialect}</prop>

@@ -5,16 +5,6 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         id="WebApp_ID" version="3.0">
 
-    <!-- Spring Security Filter -->
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
     <!-- Mappings -->
     <servlet-mapping>
         <servlet-name>tld-cicanum-ws-mvc.spring</servlet-name>
@@ -54,7 +44,7 @@
         </servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>cr.tld-cicanum.ws</param-value>
+            <param-value>cr.ac.ucr.cicanum.tld.ws</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -72,5 +62,17 @@
             org.springframework.web.context.request.RequestContextListener
         </listener-class>
     </listener>
+
+
+    <!-- Spring Security Filter -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 
 </web-app>

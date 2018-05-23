@@ -17,9 +17,7 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "usuario")
+@MappedSuperclass
 public class User extends BasicEntity implements UserDetails {
 
     /**
@@ -88,13 +86,6 @@ public class User extends BasicEntity implements UserDetails {
      */
     @Column(name = "last_login")
     protected Timestamp last_login;
-
-    /**
-     * The user's type
-     */
-    @Enumerated
-    @Column(name = "tipo_usuario", nullable = false)
-    protected UserType user_type;
 
     public User (){}
 
@@ -247,14 +238,5 @@ public class User extends BasicEntity implements UserDetails {
     public void setLast_login(Timestamp last_login) {
         this.last_login = last_login;
     }
-
-    public UserType getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(UserType user_type) {
-        this.user_type = user_type;
-    }
-
 
 }

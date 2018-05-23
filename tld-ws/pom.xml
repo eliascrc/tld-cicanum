@@ -103,7 +103,7 @@
                 <version>2.2</version>
                 <configuration>
                     <!-- Default port is 8080 -->
-                    <path>/tld-cicanum</path>
+                    <path>/tld</path>
                 </configuration>
             </plugin>
         </plugins>

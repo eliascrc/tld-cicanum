@@ -16,7 +16,7 @@ import java.util.Set;
  * @author Elías Calderón
  */
 @Entity
-@DiscriminatorValue(value = "SERVICE_MANAGER")
+@Table(name = "encargado_servicio")
 public class ServiceManager extends User {
 
     //TODO Poner referencia a Servicios encargados
