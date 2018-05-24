@@ -18,7 +18,7 @@ import java.util.Date;
 public class Toe extends BasicEntity {
 
     @Id
-    @Column(name="toe_id")
+    @Column(name="id_toe")
     private int toeId;
 
     @ManyToOne
@@ -41,10 +41,10 @@ public class Toe extends BasicEntity {
     private String physicalId;
 
     @Column(name="fecha_inicio")
-    private Date dateStarted;
+    private Date startDate;
 
     @Column(name="activo")
-    private Boolean active;
+    private boolean active;
 
     @Column(name="fecha_desactividad")
     private Date dateDisabled;
@@ -67,15 +67,23 @@ public class Toe extends BasicEntity {
     @Column(name="pais")
     private String country;
 
-    //TODO onEquals, onHash
+    public Toe() {}
+
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof Toe){
+            Toe equipment = (Toe) o;
+            result = this.toeId == equipment.getToeId();
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 19;
+        result = prime * result + this.toeId;
+        return result;
     }
 
     public int getToeId() {
@@ -126,19 +134,19 @@ public class Toe extends BasicEntity {
         this.physicalId = physicalId;
     }
 
-    public Date getDateStarted() {
-        return dateStarted;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDateStarted(Date dateStarted) {
-        this.dateStarted = dateStarted;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Boolean getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Represents a piece of equipment used to perform readings in the Termoluminiscencia Laboratory.
+ * Represents a piece of equipment used to perform readings in the TLD Laboratory.
  *
  * @author Fabián Roberto Leandro
  */
@@ -25,25 +25,26 @@ public class Equipment extends BasicEntity{
      * The equipment's description.
      */
     @Column(name = "descripcion")
-    private int description;
+    private String description;
 
-    //TODO onEquals, onHash
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof Equipment){
+            Equipment equipment = (Equipment) o;
+            result = this.equipmentId == equipment.getEquipmentId();
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + this.equipmentId;
+        return result;
     }
 
-    protected StringBuilder toStringBuilder() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("equipmentId = ").append(this.getEquipmentId());
-        sb.append(", description = ").append(this.getDescription());
-        return sb;
-    }
+    public Equipment () {}
 
     public int getEquipmentId() {
         return equipmentId;
@@ -53,11 +54,11 @@ public class Equipment extends BasicEntity{
         this.equipmentId = equipmentId;
     }
 
-    public int getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(int description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 }

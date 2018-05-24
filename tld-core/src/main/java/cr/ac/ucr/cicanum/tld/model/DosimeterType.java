@@ -11,9 +11,12 @@ import javax.persistence.Table;
  * @author Fabián Roberto Leandro
  */
 @Entity
-@Table(name="dosimeter_type")
+@Table(name="tipo_dosimetro")
 public class DosimeterType extends BasicEntity {
 
+    /**
+     * The system generated if for the dosimeter type
+     */
     @Id
     @Column(name = "id_tipo_dosimetro")
     private int dosimeterTypeId;
@@ -30,16 +33,24 @@ public class DosimeterType extends BasicEntity {
     @Column(name="inicial")
     private String initial;
 
-    //TODO onEquals, onHash
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof DosimeterType) {
+            DosimeterType dosimeterType = (DosimeterType) o;
+            result = this.dosimeterTypeId == dosimeterType.getDosimeterTypeId();
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 47;
+        result = prime * result + this.dosimeterTypeId;
+        return result;
     }
+
+    public DosimeterType() {}
 
     public int getDosimeterTypeId() {
         return dosimeterTypeId;

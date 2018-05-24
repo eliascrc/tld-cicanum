@@ -16,47 +16,78 @@ import javax.persistence.JoinColumn;
 @Table(name="variable_programa")
 public class ProgramVariable extends BasicEntity {
 
+    /**
+     * The corresponding equipment for the rates
+     */
     @Id
     @ManyToOne
     @JoinColumn(name="id_equipo")
     private Equipment equipment;
 
+    /**
+     * The corresponding type for the rates
+     */
     @Id
     @ManyToOne
     @JoinColumn(name="id_tipo_dosimetro")
     private DosimeterType dosimeterType;
 
-    /*
-     * Constants used to calculate dosages.
+    /**
+     * Constant used to calculate HP10 dosages.
      */
     @Column(name="tc")
     private String tc;
 
+    /**
+     * The minimum dosage that can be read for HP10
+     */
     @Column(name="min")
     private String min;
 
+    /**
+     * The daily rate for HP10
+     */
     @Column(name="tasa_diaria")
     private String dailyRate;
 
+    /**
+     * Constant used to calculate HP007 dosages.
+     */
     @Column(name="tc_hp007")
     private String tcHp007;
 
+    /**
+     * The minimum dosage that can be read for HP007
+     */
     @Column(name="min_hp007")
     private String minHp007;
 
+    /**
+     * The daily rate for HP007
+     */
     @Column(name="tasa_diaria_hp007")
     private String dailyRateHp007;
 
-    //TODO onEquals, onHash
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof ProgramVariable){
+            ProgramVariable programVariable = (ProgramVariable) o;
+            result = ((this.dosimeterType == null ? programVariable.getDosimeterType() == null : this.dosimeterType.equals(programVariable.getDosimeterType()))
+                    && (this.equipment == null ? programVariable.getEquipment() == null : this.equipment.equals(programVariable.getEquipment())));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.dosimeterType == null ? 0 : this.dosimeterType.hashCode());
+        result = prime * result + (this.equipment == null ? 0 : this.equipment.hashCode());
+        return result;
     }
+
+    public ProgramVariable() {}
 
     public Equipment getEquipment() {
         return equipment;
