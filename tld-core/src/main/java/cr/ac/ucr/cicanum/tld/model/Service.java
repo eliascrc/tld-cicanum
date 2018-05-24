@@ -1,6 +1,7 @@
 package cr.ac.ucr.cicanum.tld.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Represents a service a TOE can work in. It contains all the service information and the
@@ -55,6 +56,9 @@ public class Service extends BasicEntity {
 
     @Column(name = "director")
     private String directorName;
+
+    @ManyToMany(mappedBy = "managedServices")
+    private Set<ServiceManager> serviceManagers;
 
     @Override
     protected boolean onEquals(Object o) {
@@ -175,5 +179,13 @@ public class Service extends BasicEntity {
 
     public void setDirectorName(String directorName) {
         this.directorName = directorName;
+    }
+
+    public Set<ServiceManager> getServiceManagers() {
+        return serviceManagers;
+    }
+
+    public void setServiceManagers(Set<ServiceManager> serviceManagers) {
+        this.serviceManagers = serviceManagers;
     }
 }
