@@ -19,7 +19,16 @@ import java.util.Set;
 @Table(name = "encargado_ccss")
 public class CcssManager extends User {
 
-    //TODO Poner referencia a Hospitales publicos
+    /**
+     * The public hospitals that the manager can oversee
+     */
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "supervision_hospital_ccss",
+            joinColumns = { @JoinColumn(name = "nombre_usuario_ccss") },
+            inverseJoinColumns = { @JoinColumn(name = "id_hospital") }
+    )
+    private Set<Hospital> publicHospitals;
 
     public CcssManager() {
     }
@@ -32,4 +41,11 @@ public class CcssManager extends User {
         return authorities;
     }
 
+    public Set<Hospital> getPublicHospitals() {
+        return publicHospitals;
+    }
+
+    public void setPublicHospitals(Set<Hospital> publicHospitals) {
+        this.publicHospitals = publicHospitals;
+    }
 }

@@ -18,7 +18,7 @@ import java.util.Set;
  * @author Elías Calderón
  */
 @MappedSuperclass
-public class User extends BasicEntity implements UserDetails {
+public abstract class User extends BasicEntity implements UserDetails {
 
     /**
      * Username can't be empty, null or duplicated. It represents the user's email address.

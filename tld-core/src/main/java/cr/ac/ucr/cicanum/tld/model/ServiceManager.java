@@ -19,7 +19,16 @@ import java.util.Set;
 @Table(name = "encargado_servicio")
 public class ServiceManager extends User {
 
-    //TODO Poner referencia a Servicios encargados
+    /**
+     * The public services that the manager can oversee
+     */
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "asignacion_servicio",
+            joinColumns = { @JoinColumn(name = "nombre_usuario_rpr") },
+            inverseJoinColumns = { @JoinColumn(name = "id_servicio") }
+    )
+    private Set<Service> managedServices;
 
     public ServiceManager () {
     }
@@ -32,4 +41,11 @@ public class ServiceManager extends User {
         return authorities;
     }
 
+    public Set<Service> getManagedServices() {
+        return managedServices;
+    }
+
+    public void setManagedServices(Set<Service> managedServices) {
+        this.managedServices = managedServices;
+    }
 }
