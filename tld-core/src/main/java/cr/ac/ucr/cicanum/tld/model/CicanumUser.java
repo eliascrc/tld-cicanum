@@ -62,7 +62,7 @@ public class CicanumUser extends User {
         this.group = group;
     }
 
-    public boolean isCanSign() {
+    public boolean canSign() {
         return canSign;
     }
 
