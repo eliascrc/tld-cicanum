@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 
 /**
  * Represents a dosimeter a reading from a dosimeter assigned to a TOE, performed with the equipment
@@ -23,17 +24,16 @@ public class DosimeterReading extends BasicEntity {
     @Column(name = "id_lectura")
     private int dosimeterReadingId;
 
+    // TODO FIX THIS!!!!!
+    /*
     @ManyToOne
-    @JoinColumn(name="numero_dosimetro")
+    @JoinColumns({
+            @JoinColumn(name="numero_dosimetro", referencedColumnName = "numero_dosimetro", insertable = false, updatable = false ),
+            @JoinColumn(name="id_tipo_dosimetro", referencedColumnName = "id_tipo_dosimetro", insertable = false, updatable = false),
+            @JoinColumn(name="id_toe", referencedColumnName = "id_toe", insertable = false, updatable = false ),
+    })*/
     private Dosimeter dosimeter;
 
-    @ManyToOne
-    @JoinColumn(name="id_tipo_dosimetro")
-    private DosimeterType dosimeterType;
-
-    @ManyToOne
-    @JoinColumn(name="id_toe")
-    private Toe toeId;
 
     @ManyToOne
     @JoinColumn(name="id_periodo")
@@ -103,22 +103,6 @@ public class DosimeterReading extends BasicEntity {
 
     public void setDosimeter(Dosimeter dosimeter) {
         this.dosimeter = dosimeter;
-    }
-
-    public DosimeterType getDosimeterType() {
-        return dosimeterType;
-    }
-
-    public void setDosimeterType(DosimeterType dosimeterType) {
-        this.dosimeterType = dosimeterType;
-    }
-
-    public Toe getToeId() {
-        return toeId;
-    }
-
-    public void setToeId(Toe toeId) {
-        this.toeId = toeId;
     }
 
     public Period getPeriod() {
