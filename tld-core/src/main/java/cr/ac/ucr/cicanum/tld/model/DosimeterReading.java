@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Represents a dosimeter a reading from a dosimeter assigned to a TOE, performed with the equipment
@@ -17,58 +18,98 @@ import javax.persistence.JoinColumns;
  * @author Fabián Roberto Leandro
  */
 @Entity
-@Table(name="lectura_equipo")
+@Table(name="lectura_equipo",uniqueConstraints = {@UniqueConstraint(columnNames = { "numero_dosimetro", "id_tipo_dosimetro","id_toe" }) })
 public class DosimeterReading extends BasicEntity {
 
+    /**
+     * The reading's unique identifier.
+     */
     @Id
     @Column(name = "id_lectura")
     private int dosimeterReadingId;
 
+    /**
+     * The dosimeter on which the reading was performed.
+     */
     // TODO FIX THIS!!!!!
-    /*
     @ManyToOne
     @JoinColumns({
             @JoinColumn(name="numero_dosimetro", referencedColumnName = "numero_dosimetro", insertable = false, updatable = false ),
             @JoinColumn(name="id_tipo_dosimetro", referencedColumnName = "id_tipo_dosimetro", insertable = false, updatable = false),
             @JoinColumn(name="id_toe", referencedColumnName = "id_toe", insertable = false, updatable = false ),
-    })*/
+    })
     private Dosimeter dosimeter;
 
-
+    /**
+     * The unique identifier od the period during which the reading was performed.
+     */
     @ManyToOne
     @JoinColumn(name="id_periodo")
     private Period period;
 
+    /**
+     * The HP10 reading.
+     */
     @Column(name="lectura_equipo_HP10")
     private String hp10Reading;
 
+    /**
+     * The HP10 dose read.
+     */
     @Column(name="dosis_HP10")
     private String hp10Dose;
 
+    /**
+     * The user's accumulated HP10 dose.
+     */
     @Column(name="dosis_acumulada_HP10")
     private String hp10AccumulatedDose;
 
+    /**
+     * The user's annual HP10 dose.
+     */
     @Column(name="dosis_anual_HP10")
     private String hp10AnnualdDose;
 
+    /**
+     * The HP007 reading.
+     */
     @Column(name="lectura_equipo_HP007")
     private String hp007Reading;
 
+    /**
+     * The HP007 dose read.
+     */
     @Column(name="dosis_HP007")
     private String hp007Dose;
 
+    /**
+     * The user's accumulated HP007 dose.
+     */
     @Column(name="dosis_acumulada_HP007")
     private String hp007AccumulatedDose;
 
+    /**
+     * The user's annual HP3 dose.
+     */
     @Column(name="dosis_anual_HP007")
     private String hp007AnnualdDose;
 
+    /**
+     * The HP3 dose read.
+     */
     @Column(name="dosis_HP3")
     private String hp3Dose;
 
+    /**
+     * The user's accumulated HP3 dose.
+     */
     @Column(name="dosis_acumulada_HP3")
     private String hp3AccumulatedDose;
 
+    /**
+     * The user's annual HP3 dose.
+     */
     @Column(name="dosis_anual_HP3")
     private String hp3AnnualdDose;
 
