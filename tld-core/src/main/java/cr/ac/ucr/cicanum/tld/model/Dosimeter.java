@@ -1,5 +1,7 @@
 package cr.ac.ucr.cicanum.tld.model;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,20 +21,24 @@ import javax.persistence.JoinColumn;
 public class Dosimeter extends BasicEntity {
 
     @Id
-    @Column(name = "numero_dosimetro")
+    @Column(name = "id_dosimetro")
+    private int dosimeterId;
+
+    @NaturalId
+    @Column(name = "numero_dosimetro", nullable = false)
     private int dosimeterNumber;
 
-    @Id
+    @NaturalId
     @ManyToOne
-    @JoinColumn(name="id_tipo_dosimetro")
+    @JoinColumn(name="id_tipo_dosimetro", nullable = false)
     private DosimeterType dosimeterType;
 
-    @Id
+    @NaturalId
     @ManyToOne
-    @JoinColumn(name="id_toe")
+    @JoinColumn(name="id_toe", nullable = false)
     private Toe toe;
 
-    @Column(name = "activo")
+    @Column(name = "activo", nullable = false)
     private boolean active;
 
     @Override
@@ -88,4 +94,11 @@ public class Dosimeter extends BasicEntity {
         this.active = active;
     }
 
+    public int getDosimeterId() {
+        return dosimeterId;
+    }
+
+    public void setDosimeterId(int dosimeterId) {
+        this.dosimeterId = dosimeterId;
+    }
 }

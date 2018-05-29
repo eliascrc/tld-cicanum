@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 
 /**
  * Represents a dosimeter a reading from a dosimeter assigned to a TOE, performed with the equipment
@@ -24,19 +23,19 @@ public class DosimeterReading extends BasicEntity {
     @Column(name = "id_lectura")
     private int dosimeterReadingId;
 
-    // TODO FIX THIS!!!!!
-    /*
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name="numero_dosimetro", referencedColumnName = "numero_dosimetro", insertable = false, updatable = false ),
-            @JoinColumn(name="id_tipo_dosimetro", referencedColumnName = "id_tipo_dosimetro", insertable = false, updatable = false),
-            @JoinColumn(name="id_toe", referencedColumnName = "id_toe", insertable = false, updatable = false ),
-    })*/
-    private Dosimeter dosimeter;
-
+    @Column(name = "numero_dosimetro", nullable = false)
+    private int dosimeterNumber;
 
     @ManyToOne
-    @JoinColumn(name="id_periodo")
+    @JoinColumn(name = "id_toe", nullable = false)
+    private Toe toe;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_dosimetro", nullable = false)
+    private DosimeterType dosimeterType;
+
+    @ManyToOne
+    @JoinColumn(name="id_periodo", nullable = false)
     private Period period;
 
     @Column(name="lectura_equipo_HP10")
@@ -95,14 +94,6 @@ public class DosimeterReading extends BasicEntity {
 
     public void setDosimeterReadingId(int dosimeterReadingId) {
         this.dosimeterReadingId = dosimeterReadingId;
-    }
-
-    public Dosimeter getDosimeter() {
-        return dosimeter;
-    }
-
-    public void setDosimeter(Dosimeter dosimeter) {
-        this.dosimeter = dosimeter;
     }
 
     public Period getPeriod() {
@@ -199,5 +190,29 @@ public class DosimeterReading extends BasicEntity {
 
     public void setHp3AnnualdDose(String hp3AnnualdDose) {
         this.hp3AnnualdDose = hp3AnnualdDose;
+    }
+
+    public int getDosimeterNumber() {
+        return dosimeterNumber;
+    }
+
+    public void setDosimeterNumber(int dosimeterNumber) {
+        this.dosimeterNumber = dosimeterNumber;
+    }
+
+    public Toe getToe() {
+        return toe;
+    }
+
+    public void setToe(Toe toe) {
+        this.toe = toe;
+    }
+
+    public DosimeterType getDosimeterType() {
+        return dosimeterType;
+    }
+
+    public void setDosimeterType(DosimeterType dosimeterType) {
+        this.dosimeterType = dosimeterType;
     }
 }
