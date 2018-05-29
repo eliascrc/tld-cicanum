@@ -27,6 +27,8 @@ public class Sector extends BasicEntity {
     @Column(name = "nombre")
     private String name;
 
+    public Sector(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;

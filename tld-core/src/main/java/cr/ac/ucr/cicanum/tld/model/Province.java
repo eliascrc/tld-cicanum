@@ -27,6 +27,8 @@ public class Province extends BasicEntity {
     @Column(name = "nombre")
     private String name;
 
+    public Province(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;

@@ -56,6 +56,8 @@ public class Dosimeter extends BasicEntity {
     @Column(name = "activo", nullable = false)
     private boolean active;
 
+    public Dosimeter(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;

@@ -60,6 +60,8 @@ public class Service extends BasicEntity {
     @ManyToMany(mappedBy = "managedServices")
     private Set<ServiceManager> serviceManagers;
 
+    public Service(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;

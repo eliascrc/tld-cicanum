@@ -27,6 +27,8 @@ public class Equipment extends BasicEntity{
     @Column(name = "descripcion")
     private String description;
 
+    public Equipment(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
@@ -43,8 +45,6 @@ public class Equipment extends BasicEntity{
         result = prime * result + this.equipmentId;
         return result;
     }
-
-    public Equipment () {}
 
     public int getEquipmentId() {
         return equipmentId;

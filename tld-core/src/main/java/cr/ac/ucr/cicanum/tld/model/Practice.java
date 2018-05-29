@@ -27,6 +27,8 @@ public class Practice extends BasicEntity {
     @Column(name = "nombre")
     private String name;
 
+    public Practice(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;

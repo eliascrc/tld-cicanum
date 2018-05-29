@@ -68,6 +68,8 @@ public class ProgramVariable extends BasicEntity {
     @Column(name="tasa_diaria_hp007")
     private String dailyRateHp007;
 
+    public ProgramVariable(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
@@ -86,8 +88,6 @@ public class ProgramVariable extends BasicEntity {
         result = prime * result + (this.equipment == null ? 0 : this.equipment.hashCode());
         return result;
     }
-
-    public ProgramVariable() {}
 
     public Equipment getEquipment() {
         return equipment;

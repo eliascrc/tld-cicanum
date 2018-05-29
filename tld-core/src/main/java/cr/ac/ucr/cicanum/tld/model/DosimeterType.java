@@ -33,6 +33,8 @@ public class DosimeterType extends BasicEntity {
     @Column(name="inicial")
     private String initial;
 
+    public DosimeterType(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
@@ -49,8 +51,6 @@ public class DosimeterType extends BasicEntity {
         result = prime * result + this.dosimeterTypeId;
         return result;
     }
-
-    public DosimeterType() {}
 
     public int getDosimeterTypeId() {
         return dosimeterTypeId;

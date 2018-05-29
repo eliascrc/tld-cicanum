@@ -30,8 +30,7 @@ public class ServiceManager extends User {
     )
     private Set<Service> managedServices;
 
-    public ServiceManager () {
-    }
+    public ServiceManager () {}
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

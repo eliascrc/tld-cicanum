@@ -43,6 +43,8 @@ public class Period extends BasicEntity {
     @Column(name="periodo_completo")
     private boolean completePeriod;
 
+    public Period(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;

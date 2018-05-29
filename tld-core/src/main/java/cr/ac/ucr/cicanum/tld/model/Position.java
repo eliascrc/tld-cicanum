@@ -27,8 +27,7 @@ public class Position extends BasicEntity {
     @Column(name = "nombre")
     private String name;
 
-    public Position() {
-    }
+    public Position() {}
 
     @Override
     protected boolean onEquals(Object o) {

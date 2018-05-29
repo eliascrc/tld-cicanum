@@ -113,6 +113,8 @@ public class DosimeterReading extends BasicEntity {
     @Column(name="dosis_anual_HP3")
     private String hp3AnnualdDose;
 
+    public DosimeterReading(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;

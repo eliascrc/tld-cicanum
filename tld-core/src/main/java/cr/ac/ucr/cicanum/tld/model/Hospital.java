@@ -32,6 +32,8 @@ public class Hospital extends BasicEntity {
     @Column(name = "privado")
     private boolean privateHospital;
 
+    public Hospital(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
