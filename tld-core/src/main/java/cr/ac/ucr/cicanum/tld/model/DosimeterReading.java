@@ -19,10 +19,16 @@ import javax.persistence.JoinColumn;
 @Table(name="lectura_equipo")
 public class DosimeterReading extends BasicEntity {
 
+    /**
+     * The reading's unique identifier.
+     */
     @Id
     @Column(name = "id_lectura")
     private int dosimeterReadingId;
 
+    /**
+     * The dosimeter number of the dosimeter on which the reading was performed.
+     */
     @Column(name = "numero_dosimetro", nullable = false)
     private int dosimeterNumber;
 
@@ -34,40 +40,76 @@ public class DosimeterReading extends BasicEntity {
     @JoinColumn(name = "id_tipo_dosimetro", nullable = false)
     private DosimeterType dosimeterType;
 
+    /**
+     * The unique identifier of the period during which the reading was performed.
+     */
     @ManyToOne
     @JoinColumn(name="id_periodo", nullable = false)
     private Period period;
 
+    /**
+     * The HP10 reading.
+     */
     @Column(name="lectura_equipo_HP10")
     private String hp10Reading;
 
+    /**
+     * The HP10 dose read.
+     */
     @Column(name="dosis_HP10")
     private String hp10Dose;
 
+    /**
+     * The user's accumulated HP10 dose.
+     */
     @Column(name="dosis_acumulada_HP10")
     private String hp10AccumulatedDose;
 
+    /**
+     * The user's annual HP10 dose.
+     */
     @Column(name="dosis_anual_HP10")
     private String hp10AnnualdDose;
 
+    /**
+     * The HP007 reading.
+     */
     @Column(name="lectura_equipo_HP007")
     private String hp007Reading;
 
+    /**
+     * The HP007 dose read.
+     */
     @Column(name="dosis_HP007")
     private String hp007Dose;
 
+    /**
+     * The user's accumulated HP007 dose.
+     */
     @Column(name="dosis_acumulada_HP007")
     private String hp007AccumulatedDose;
 
+    /**
+     * The user's annual HP3 dose.
+     */
     @Column(name="dosis_anual_HP007")
     private String hp007AnnualdDose;
 
+    /**
+     * The HP3 dose read.
+     */
     @Column(name="dosis_HP3")
     private String hp3Dose;
 
+    /**
+     * The user's accumulated HP3 dose.
+     */
     @Column(name="dosis_acumulada_HP3")
     private String hp3AccumulatedDose;
 
+    /**
+     * The user's annual HP3 dose.
+     */
     @Column(name="dosis_anual_HP3")
     private String hp3AnnualdDose;
 

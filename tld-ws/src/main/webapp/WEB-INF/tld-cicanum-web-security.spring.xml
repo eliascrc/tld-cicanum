@@ -1,5 +1,5 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:security="http://www.springframework.org/schema/security"
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+        xmlns:beans="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -7,13 +7,13 @@
 		http://www.springframework.org/schema/security/spring-security.xsd"
        default-init-method="init">
 
-    <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider ref="cicanumUserAuthenticationProvider"/>
-    </security:authentication-manager>
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="cicanumUserAuthenticationProvider"/>
+    </authentication-manager>
 
-    <security:http use-expressions="true" pattern="/**/*" auto-config="true">
-        <security:intercept-url pattern="/ws/**/*" access="permitAll()"/>
-    </security:http>
+    <http use-expressions="true" pattern="/**/*" auto-config="true">
+        <intercept-url pattern="/ws/**/*" access="permitAll()"/>
+    </http>
 
 
-</beans>
+</beans:beans>

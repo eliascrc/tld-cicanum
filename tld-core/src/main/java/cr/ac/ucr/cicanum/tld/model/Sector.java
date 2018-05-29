@@ -22,7 +22,7 @@ public class Sector extends BasicEntity {
     private int sectorId;
 
     /**
-     * The name of the sectir
+     * The name of the sector
      */
     @Column(name = "nombre")
     private String name;

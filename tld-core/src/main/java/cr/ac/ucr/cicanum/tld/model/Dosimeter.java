@@ -20,6 +20,9 @@ import javax.persistence.JoinColumn;
 @Table(name="dosimetro_asignado")
 public class Dosimeter extends BasicEntity {
 
+    /**
+     * The dosimeter's number, assigned by the TLD Laboratory.
+     */
     @Id
     @Column(name = "id_dosimetro")
     private int dosimeterId;
@@ -28,16 +31,25 @@ public class Dosimeter extends BasicEntity {
     @Column(name = "numero_dosimetro", nullable = false)
     private int dosimeterNumber;
 
+    /**
+     * The dosimeter's unique identifier.
+     */
     @NaturalId
     @ManyToOne
     @JoinColumn(name="id_tipo_dosimetro", nullable = false)
     private DosimeterType dosimeterType;
 
+    /**
+     * The unique identifier of the TOE to which the dosimeter is assigned.
+     */
     @NaturalId
     @ManyToOne
     @JoinColumn(name="id_toe", nullable = false)
     private Toe toe;
 
+    /**
+     * Indicates if the dosimeter is active.
+     */
     @Column(name = "activo", nullable = false)
     private boolean active;
 
