@@ -1,7 +1,9 @@
 package cr.ac.ucr.cicanum.tld.core.province.service;
 
+import cr.ac.ucr.cicanum.tld.core.position.dao.PositionDao;
 import cr.ac.ucr.cicanum.tld.model.Province;
 import cr.ac.ucr.cicanum.tld.support.service.CrudService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Provides business logic services related to {@link cr.ac.ucr.cicanum.tld.model.Province} entities.
@@ -10,6 +12,7 @@ import cr.ac.ucr.cicanum.tld.support.service.CrudService;
  */
 
 public interface ProvinceService extends CrudService<Province, String> {
+
     /*
      * Por ahora sólo la estructura, implementar los métodos necesarios para el
      * front end cuando se necesiten.
