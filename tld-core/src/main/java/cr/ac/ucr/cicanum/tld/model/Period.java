@@ -26,7 +26,7 @@ public class Period extends BasicEntity {
 
     @ManyToOne
     @JoinColumn(name="id_servicio")
-    private Service service;
+    private MedicalService medicalService;
 
     @Column(name="fecha_inicio")
     private Date startDate;
@@ -70,12 +70,12 @@ public class Period extends BasicEntity {
         this.periodId = periodId;
     }
 
-    public Service getService() {
-        return service;
+    public MedicalService getMedicalService() {
+        return medicalService;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setMedicalService(MedicalService medicalService) {
+        this.medicalService = medicalService;
     }
 
     public Date getStartDate() {

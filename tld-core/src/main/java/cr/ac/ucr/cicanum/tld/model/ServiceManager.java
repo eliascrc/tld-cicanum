@@ -28,7 +28,7 @@ public class ServiceManager extends User {
             joinColumns = { @JoinColumn(name = "nombre_usuario_rpr") },
             inverseJoinColumns = { @JoinColumn(name = "id_servicio") }
     )
-    private Set<Service> managedServices;
+    private Set<MedicalService> managedMedicalServices;
 
     public ServiceManager () {}
 
@@ -40,11 +40,11 @@ public class ServiceManager extends User {
         return authorities;
     }
 
-    public Set<Service> getManagedServices() {
-        return managedServices;
+    public Set<MedicalService> getManagedMedicalServices() {
+        return managedMedicalServices;
     }
 
-    public void setManagedServices(Set<Service> managedServices) {
-        this.managedServices = managedServices;
+    public void setManagedMedicalServices(Set<MedicalService> managedMedicalServices) {
+        this.managedMedicalServices = managedMedicalServices;
     }
 }

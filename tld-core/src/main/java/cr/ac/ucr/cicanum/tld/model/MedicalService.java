@@ -11,7 +11,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="servicio")
-public class Service extends BasicEntity {
+public class MedicalService extends BasicEntity {
 
     @Id
     @Column(name = "id_servicio")
@@ -60,14 +60,14 @@ public class Service extends BasicEntity {
     @ManyToMany(mappedBy = "managedServices")
     private Set<ServiceManager> serviceManagers;
 
-    public Service(){}
+    public MedicalService(){}
 
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
-        if ( o instanceof Service){
-            Service service = (Service) o;
-            result = this.serviceId == service.getServiceId();
+        if ( o instanceof MedicalService){
+            MedicalService medicalService = (MedicalService) o;
+            result = this.serviceId == medicalService.getServiceId();
         }
         return result;
     }

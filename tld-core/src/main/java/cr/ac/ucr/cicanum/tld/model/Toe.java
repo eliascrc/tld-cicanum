@@ -27,7 +27,7 @@ public class Toe extends BasicEntity {
 
     @ManyToOne
     @JoinColumn(name="id_servicio")
-    private Service service;
+    private MedicalService medicalService;
 
     @ManyToOne
     @JoinColumn(name="id_cargo")
@@ -102,12 +102,12 @@ public class Toe extends BasicEntity {
         this.dosimeterType = dosimeterType;
     }
 
-    public Service getService() {
-        return service;
+    public MedicalService getMedicalService() {
+        return medicalService;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setMedicalService(MedicalService medicalService) {
+        this.medicalService = medicalService;
     }
 
     public Position getPosition() {

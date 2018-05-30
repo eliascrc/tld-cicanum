@@ -15,4 +15,8 @@ import javax.transaction.Transactional;
 @Service("dosimeterTypeService")
 @Transactional
 public class DosimeterTypeServiceImpl extends CrudServiceImpl<DosimeterType, String> implements DosimeterTypeService {
+    /*
+     * Por ahora sólo la estructura, implementar los métodos necesarios para el
+     * front end cuando se necesiten.
+     */
 }
