@@ -171,6 +171,13 @@
             <version>5.0.4.RELEASE</version>
         </dependency>
 
+        <!-- FlexJSON -->
+        <dependency>
+            <groupId>net.sf.flexjson</groupId>
+            <artifactId>flexjson</artifactId>
+            <version>3.3</version>
+        </dependency>
+
     </dependencies>
 
 </project>
