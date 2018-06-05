@@ -1,6 +1,5 @@
 package cr.ac.ucr.cicanum.tld.build;
 
-import cr.ac.ucr.cicanum.tld.core.TestBean;
 import cr.ac.ucr.cicanum.tld.core.security.ccss_manager.service.CcssManagerService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

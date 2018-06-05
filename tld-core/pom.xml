@@ -73,7 +73,7 @@
                 </executions>
                 <configuration>
                     <show>true</show>
-                    <skip>false</skip>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
 
