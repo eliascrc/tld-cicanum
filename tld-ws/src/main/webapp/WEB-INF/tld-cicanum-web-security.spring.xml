@@ -1,19 +1,36 @@
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-        xmlns:beans="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd"
        default-init-method="init">
 
-    <authentication-manager alias="authenticationManager">
-        <authentication-provider ref="cicanumUserAuthenticationProvider"/>
-    </authentication-manager>
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="cicanumUserAuthenticationProvider"/>
+    </security:authentication-manager>
 
-    <http use-expressions="true" pattern="/**/*" auto-config="true">
-        <intercept-url pattern="/ws/**/*" access="permitAll()"/>
-    </http>
+    <security:http use-expressions="true" pattern="/**/*" auto-config="false" entry-point-ref="customAuthEntryPoint">
+        <security:form-login login-processing-url="/ws/login" authentication-success-handler-ref="successLoginHandler"
+                             authentication-failure-handler-ref="loginFailureHandler" username-parameter="username"
+                             password-parameter="password" />
+        <security:logout logout-url="/ws/logout" success-handler-ref="logoutHandler"/>
+        <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
+        <security:intercept-url pattern="/ws/cicanumUser/loggedIn" access="permitAll()"/>
+        <security:intercept-url pattern="/ws/cicanumUser/authenticated" access="hasAuthority('ROLE_CICANUM_USER')"/>
+        <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
+        <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="OPTIONS"/>
+        <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
+        <security:access-denied-handler ref="accessDeniedHandler"/>
+        <security:csrf disabled="true"/>
+    </security:http>
+
+    <bean id="customAuthEntryPoint" class="cr.ac.ucr.cicanum.tld.ws.rest.support.security.CustomAuthenticationEntryPoint">
+        <property name="realmName" value="dosimetriatld.ucr.ac.cr"/>
+    </bean>
+
+    <bean id="accessDeniedHandler" class="cr.ac.ucr.cicanum.tld.ws.rest.support.security.UnauthorizedAccessHandler"/>
 
 
-</beans:beans>
+</beans>

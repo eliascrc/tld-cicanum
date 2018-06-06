@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,13 +22,6 @@ import java.util.Set;
 public abstract class User extends BasicEntity implements UserDetails {
 
     /**
-     * Username can't be empty, null or duplicated. It represents the user's email address.
-     */
-    @Id
-    @Column(name = "nombre_usuario")
-    protected String username;
-
-    /**
      * The user's first name.
      */
     @Column(name = "nombre", nullable = false)
@@ -38,6 +32,13 @@ public abstract class User extends BasicEntity implements UserDetails {
      */
     @Column(name = "apellido", nullable = false)
     protected String lastName;
+
+    /**
+     * Username can't be empty, null or duplicated. It represents the user's email address.
+     */
+    @Id
+    @Column(name = "nombre_usuario", nullable = false)
+    protected String username;
 
     /**
      * User password.
@@ -72,20 +73,20 @@ public abstract class User extends BasicEntity implements UserDetails {
     /**
      * Indicates if the user needs to update their information
      */
-    @Column(name = "actualizar_datos")
+    @Column(name = "actualizar_datos", nullable = false)
     protected boolean updateInformation;
 
     /**
      * The login count of the user
      */
     @Column(name = "login_count", nullable = false)
-    protected int login_count;
+    protected int loginCount;
 
     /**
      * The last login date of the user
      */
     @Column(name = "last_login")
-    protected Timestamp last_login;
+    protected Date lastLogin;
 
     public User (){}
 
@@ -223,20 +224,20 @@ public abstract class User extends BasicEntity implements UserDetails {
         this.updateInformation = updateInformation;
     }
 
-    public int getLogin_count() {
-        return login_count;
+    public int getLoginCount() {
+        return loginCount;
     }
 
-    public void setLogin_count(int login_count) {
-        this.login_count = login_count;
+    public void setLoginCount(int loginCount) {
+        this.loginCount = loginCount;
     }
 
-    public Timestamp getLast_login() {
-        return last_login;
+    public Date getLastLogin() {
+        return lastLogin;
     }
 
-    public void setLast_login(Timestamp last_login) {
-        this.last_login = last_login;
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
 }

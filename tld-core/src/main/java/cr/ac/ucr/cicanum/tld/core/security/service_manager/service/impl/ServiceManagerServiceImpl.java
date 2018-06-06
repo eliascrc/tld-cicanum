@@ -71,6 +71,14 @@ public class ServiceManagerServiceImpl extends CrudServiceImpl<ServiceManager, S
      */
     @Override
     public String create(ServiceManager serviceManager) {
+        if(serviceManager == null) {
+            throw new IllegalArgumentException("The service manager to be created cannot be null.");
+        }
+
+        if(serviceManager.getUsername() == null) {
+            throw new IllegalArgumentException("The service manager to be created cannot have a null username.");
+        }
+
         ServiceManager foundServiceManager = this.serviceManagerDao.findServiceManagerByUsername((serviceManager.getUsername().toLowerCase()));
         if(foundServiceManager != null) {
             throw new IllegalArgumentException("The service manager with name: " + serviceManager.getUsername() + " already exists.");

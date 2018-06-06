@@ -5,19 +5,7 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         id="WebApp_ID" version="3.0">
 
-    <!-- Mappings -->
-    <servlet-mapping>
-        <servlet-name>tld-cicanum-ws-mvc.spring</servlet-name>
-        <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
-
-    <!-- The webservices are mapped to the path /tld/ws -->
-    <servlet-mapping>
-        <servlet-name>jersey-servlet</servlet-name>
-        <url-pattern>/ws/*</url-pattern>
-    </servlet-mapping>
-
-    <!-- Servlets -->
+    <!-- MVC Servlet -->
     <servlet>
         <servlet-name>tld-cicanum-ws-mvc.spring</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -28,17 +16,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- Provides the paths for the contexts of spring -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/tld-cicanum-ws.spring.xml /WEB-INF/tld-cicanum-web-security.spring.xml
-            classpath:tld-cicanum-core.spring.xml,
-            classpath:tld-cicanum-persistence.spring.xml,
-            classpath:tld-cicanum-security.spring.xml
-        </param-value>
-    </context-param>
-
+    <!-- Jersey Servlet -->
     <servlet>
         <servlet-name>jersey-servlet</servlet-name>
         <servlet-class>
@@ -54,6 +32,29 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <!-- Mappings -->
+    <servlet-mapping>
+        <servlet-name>tld-cicanum-ws-mvc.spring</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+
+    <!-- The webservices are mapped to the path /tld/ws -->
+    <servlet-mapping>
+        <servlet-name>jersey-servlet</servlet-name>
+        <url-pattern>/ws/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Provides the paths for the contexts of spring -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/tld-cicanum-ws.spring.xml /WEB-INF/tld-cicanum-web-security.spring.xml
+            classpath:tld-cicanum-core.spring.xml,
+            classpath:tld-cicanum-persistence.spring.xml,
+            classpath:tld-cicanum-security.spring.xml
+        </param-value>
+    </context-param>
 
     <!-- Context Loader -->
     <listener>
@@ -79,6 +80,5 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
 
 </web-app>

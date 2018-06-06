@@ -20,7 +20,7 @@ public class CicanumUser extends User {
     /**
      * The initials of the user
      */
-    @Column(name = "iniciales")
+    @Column(name = "iniciales", nullable = false)
     private String initials;
 
     /**
@@ -32,7 +32,7 @@ public class CicanumUser extends User {
     /**
      * Indicates if the user can sign a document
      */
-    @Column(name = "puede_firmar")
+    @Column(name = "puede_firmar", nullable = false)
     private boolean canSign;
 
     public CicanumUser () {
@@ -62,7 +62,7 @@ public class CicanumUser extends User {
         this.group = group;
     }
 
-    public boolean canSign() {
+    public boolean getCanSign() {
         return canSign;
     }
 

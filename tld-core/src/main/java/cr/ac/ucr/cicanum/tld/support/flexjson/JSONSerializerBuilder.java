@@ -1,6 +1,8 @@
 package cr.ac.ucr.cicanum.tld.support.flexjson;
 
 import cr.ac.ucr.cicanum.tld.model.CicanumUser;
+import cr.ac.ucr.cicanum.tld.model.MedicalService;
+import cr.ac.ucr.cicanum.tld.model.ServiceManager;
 import flexjson.JSONSerializer;
 import flexjson.transformer.BooleanTransformer;
 import flexjson.transformer.DateTransformer;
@@ -25,10 +27,8 @@ public class JSONSerializerBuilder {
     private static final List<String> GLOBAL_INCLUDES = new LinkedList<>();
 
     static{
-        GLOBAL_INCLUDES.add("id");
         GLOBAL_INCLUDES.add("entityCreationTimestamp");
         GLOBAL_INCLUDES.add("lastUpdatedTimestamp");
-        GLOBAL_INCLUDES.add("entityVersion");
     }
 
     /**
@@ -115,7 +115,36 @@ public class JSONSerializerBuilder {
      *
      * @return the JSONSerializer to be used to serialize Cicanum User.
      */
-    public static JSONSerializer getCicanumUser() {
+    public static JSONSerializer getCicanumUserSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("enabled");
+        tempIncludes.add("resetPassword");
+        tempIncludes.add("updateInformation");
+        tempIncludes.add("group");
+        tempIncludes.add("canSign");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CicanumUser.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        serializer.transform(new BooleanTransformer(), "enabled");
+        serializer.transform(new BooleanTransformer(), "resetPassword");
+        serializer.transform(new BooleanTransformer(), "updateInformation");
+        serializer.transform(new BooleanTransformer(), "canSign");
+
+        // Logs the creation of the serializer
+        logger.trace("Cicanum User Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    public static JSONSerializer getServiceManagerSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes;
@@ -123,24 +152,29 @@ public class JSONSerializerBuilder {
         excludes.addAll(getGlobalExcludes());
 
         tempIncludes = new LinkedList<>();
+        tempIncludes.add("serviceId");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(MedicalService.class, "managedServices", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("enabled");
-        tempIncludes.add("group");
-        tempIncludes.add("canSign");
+        tempIncludes.add("resetPassword");
+        tempIncludes.add("updateInformation");
 
-
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CicanumUser.class, "", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ServiceManager.class, "", tempIncludes));
 
         serializer.setExcludes(excludes);
 
-        serializer.transform(new BooleanTransformer(), "isAdministrator");
+        serializer.transform(new BooleanTransformer(), "enabled");
+        serializer.transform(new BooleanTransformer(), "resetPassword");
+        serializer.transform(new BooleanTransformer(), "updateInformation");
 
         // Logs the creation of the serializer
         logger.trace("Cicanum User Serializer {} created", serializer.toString());
         return serializer;
     }
 
-    // TODO RPR and CCSS User Serializer
+    // TODO CCSS User Serializer
 
 }

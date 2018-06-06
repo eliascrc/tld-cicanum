@@ -71,6 +71,14 @@ public class CcssManagerServiceImpl extends CrudServiceImpl<CcssManager, String>
      */
     @Override
     public String create(CcssManager ccssManager) {
+        if(ccssManager == null) {
+            throw new IllegalArgumentException("The ccss manager to be created cannot be null.");
+        }
+
+        if(ccssManager.getUsername() == null) {
+            throw new IllegalArgumentException("The ccss manager to be created cannot have a null username.");
+        }
+
         CcssManager foundCcssManager = this.ccssManagerDao.findCcssManagerByUsername((ccssManager.getUsername().toLowerCase()));
         if(foundCcssManager != null) {
             throw new IllegalArgumentException("The ccss manager with name: " + ccssManager.getUsername() + " already exists.");

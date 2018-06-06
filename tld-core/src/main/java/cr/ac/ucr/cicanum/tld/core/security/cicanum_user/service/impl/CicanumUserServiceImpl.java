@@ -71,6 +71,14 @@ public class CicanumUserServiceImpl extends CrudServiceImpl<CicanumUser, String>
      */
     @Override
     public String create(CicanumUser cicanumUser) {
+        if(cicanumUser == null) {
+            throw new IllegalArgumentException("The cicanum user to be created cannot be null.");
+        }
+
+        if(cicanumUser.getUsername() == null) {
+            throw new IllegalArgumentException("The cicanum user to be created cannot have a null username.");
+        }
+
         CicanumUser foundCicanumUser = this.cicanumUserDao.findCicanumUserByUsername((cicanumUser.getUsername().toLowerCase()));
         if(foundCicanumUser != null) {
             throw new IllegalArgumentException("The cicanum user with name: " + cicanumUser.getUsername() + " already exists.");

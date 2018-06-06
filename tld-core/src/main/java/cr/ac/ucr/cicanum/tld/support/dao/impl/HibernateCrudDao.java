@@ -44,6 +44,8 @@ public abstract class HibernateCrudDao<ModelObjectType extends BasicEntity, KeyT
 
     @SuppressWarnings("unchecked")
     public KeyType create(ModelObjectType entity) {
+        entity.setEntityCreationTimestamp(new Date());
+        entity.setLastUpdatedTimestamp(new Date());
         return (KeyType) getSessionFactory().getCurrentSession().save(entity);
     }
 
