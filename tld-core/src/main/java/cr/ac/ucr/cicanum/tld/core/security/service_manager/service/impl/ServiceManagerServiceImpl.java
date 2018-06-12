@@ -2,7 +2,9 @@ package cr.ac.ucr.cicanum.tld.core.security.service_manager.service.impl;
 
 import cr.ac.ucr.cicanum.tld.core.security.service_manager.dao.ServiceManagerDao;
 import cr.ac.ucr.cicanum.tld.core.security.service_manager.service.ServiceManagerService;
+import cr.ac.ucr.cicanum.tld.core.security.user.service.UserService;
 import cr.ac.ucr.cicanum.tld.model.ServiceManager;
+import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
 import cr.ac.ucr.cicanum.tld.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class ServiceManagerServiceImpl extends CrudServiceImpl<ServiceManager, S
      */
     @Autowired
     private ServiceManagerDao serviceManagerDao;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Password encoder provided by spring to cipher a user's password and store it in the database so that it can
@@ -79,9 +84,9 @@ public class ServiceManagerServiceImpl extends CrudServiceImpl<ServiceManager, S
             throw new IllegalArgumentException("The service manager to be created cannot have a null username.");
         }
 
-        ServiceManager foundServiceManager = this.serviceManagerDao.findServiceManagerByUsername((serviceManager.getUsername().toLowerCase()));
-        if(foundServiceManager != null) {
-            throw new IllegalArgumentException("The service manager with name: " + serviceManager.getUsername() + " already exists.");
+        User foundUser = this.userService.getUserByUsername((serviceManager.getUsername().toLowerCase()));
+        if(foundUser != null) {
+            throw new IllegalArgumentException("The user with name: " + serviceManager.getUsername() + " already exists.");
         }
 
         serviceManager.setUsername(serviceManager.getUsername().toLowerCase());

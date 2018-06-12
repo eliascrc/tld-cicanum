@@ -9,6 +9,8 @@
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider ref="cicanumUserAuthenticationProvider"/>
+        <security:authentication-provider ref="serviceManagerAuthenticationProvider"/>
+        <security:authentication-provider ref="ccssManagerAuthenticationProvider"/>
     </security:authentication-manager>
 
     <security:http use-expressions="true" pattern="/**/*" auto-config="false" entry-point-ref="customAuthEntryPoint">

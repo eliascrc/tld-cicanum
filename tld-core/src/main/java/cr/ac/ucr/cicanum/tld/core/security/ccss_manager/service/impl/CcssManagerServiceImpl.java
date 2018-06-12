@@ -2,7 +2,9 @@ package cr.ac.ucr.cicanum.tld.core.security.ccss_manager.service.impl;
 
 import cr.ac.ucr.cicanum.tld.core.security.ccss_manager.dao.CcssManagerDao;
 import cr.ac.ucr.cicanum.tld.core.security.ccss_manager.service.CcssManagerService;
+import cr.ac.ucr.cicanum.tld.core.security.user.service.UserService;
 import cr.ac.ucr.cicanum.tld.model.CcssManager;
+import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
 import cr.ac.ucr.cicanum.tld.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class CcssManagerServiceImpl extends CrudServiceImpl<CcssManager, String>
      */
     @Autowired
     private CcssManagerDao ccssManagerDao;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Password encoder provided by spring to cipher a user's password and store it in the database so that it can
@@ -79,9 +84,9 @@ public class CcssManagerServiceImpl extends CrudServiceImpl<CcssManager, String>
             throw new IllegalArgumentException("The ccss manager to be created cannot have a null username.");
         }
 
-        CcssManager foundCcssManager = this.ccssManagerDao.findCcssManagerByUsername((ccssManager.getUsername().toLowerCase()));
-        if(foundCcssManager != null) {
-            throw new IllegalArgumentException("The ccss manager with name: " + ccssManager.getUsername() + " already exists.");
+        User foundUser = this.userService.getUserByUsername((ccssManager.getUsername().toLowerCase()));
+        if(foundUser != null) {
+            throw new IllegalArgumentException("The user with name: " + ccssManager.getUsername() + " already exists.");
         }
 
         ccssManager.setUsername(ccssManager.getUsername().toLowerCase());

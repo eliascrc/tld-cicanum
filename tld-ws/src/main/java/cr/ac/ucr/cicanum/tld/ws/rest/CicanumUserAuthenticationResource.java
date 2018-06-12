@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with various endpoints to process requests regarding the authentication of users, such as login, logout,
+ * Resource with various endpoints to process requests regarding the authentication of cicanum users, such as login, logout,
  * the retrieval of the currently loggedin user's information and if there's a currently loggedin user.
  *
  * @author Elías Calderón
@@ -23,18 +23,20 @@ import javax.ws.rs.core.Response;
 @Component
 @Scope("request")
 @Path("/cicanumUser")
-public class AuthenticationResource {
+public class CicanumUserAuthenticationResource {
 
     /**
      * Checks if there is a currently logged in user via SecurityUtils
      *
-     * @return 200 with "true" if a user is currently logged in, "false" if not
+     * @return 200 with "true" if a cicanum user is currently logged in, "false" if not
      */
     @GET
     @Path("/loggedIn")
     @Produces(MediaType.TEXT_PLAIN)
     public Response isLoggedIn() {
-        if (SecurityUtils.getLoggedInUser() == null)
+        User loggedInUser = SecurityUtils.getLoggedInUser();
+
+        if (!(loggedInUser instanceof CicanumUser))
             return Response.ok().entity("false").build();
 
         return Response.ok().entity("true").build();
