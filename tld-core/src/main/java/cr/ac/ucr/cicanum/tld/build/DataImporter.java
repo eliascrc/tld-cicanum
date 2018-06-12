@@ -84,7 +84,7 @@ public class DataImporter {
         CcssManager ccssManager1 = new CcssManager();
         ccssManager1.setFirstName("Elias");
         ccssManager1.setLastName("Calderon Calderon");
-        ccssManager1.setUsername("eliasrc");
+        ccssManager1.setUsername("eliasrcCS");
         ccssManager1.setPassword("tld.123");
         ccssManager1.setPhoneNumber("22554411");
         ccssManager1.setEmail("elias.calderon@gmail.com");
@@ -97,7 +97,7 @@ public class DataImporter {
         CcssManager ccssManager2 = new CcssManager();
         ccssManager2.setFirstName("Roberto");
         ccssManager2.setLastName("Leandro Flores");
-        ccssManager2.setUsername("farol");
+        ccssManager2.setUsername("farolCS");
         ccssManager2.setPassword("tld.123");
         ccssManager2.setPhoneNumber("22884477");
         ccssManager2.setEmail("roberto.leandro@gmail.com");
