@@ -6,6 +6,7 @@ import cr.ac.ucr.cicanum.tld.core.security.user.service.UserService;
 import cr.ac.ucr.cicanum.tld.model.CicanumUser;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
+import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
 import cr.ac.ucr.cicanum.tld.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,6 +53,15 @@ public class CicanumUserServiceImpl extends CrudServiceImpl<CicanumUser, String>
     @Override
     public CicanumUser getCicanumUserByUsername(String username) {
         return this.cicanumUserDao.findCicanumUserByUsername(username);
+    }
+
+    /**
+     * @see CicanumUserService#getSerializedCicanumUser(CicanumUser)
+     */
+    @Override
+    public String getSerializedCicanumUser(CicanumUser cicanumUser) {
+        cicanumUser = this.getCicanumUserByUsername(cicanumUser.getUsername());
+        return JSONSerializerBuilder.getCicanumUserSerializer().serialize(cicanumUser);
     }
 
     /**

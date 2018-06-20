@@ -1,7 +1,7 @@
 package cr.ac.ucr.cicanum.tld.ws.rest;
 
-import cr.ac.ucr.cicanum.tld.core.security.service_manager.service.ServiceManagerService;
-import cr.ac.ucr.cicanum.tld.model.ServiceManager;
+import cr.ac.ucr.cicanum.tld.core.security.ccss_manager.service.CcssManagerService;
+import cr.ac.ucr.cicanum.tld.model.CcssManager;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +15,18 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with various endpoints to process requests regarding the authentication of service managers, such as login, logout,
+ * Resource with various endpoints to process requests regarding the authentication of ccss managers, such as login, logout,
  * the retrieval of the currently loggedin user's information and if there's a currently loggedin user.
  *
  * @author Elías Calderón
  */
 @Component
 @Scope("request")
-@Path("/serviceManager")
-public class ServiceManagerAuthenticationResource {
+@Path("/ccssManager")
+public class CcssManagerAuthenticationResource {
 
     @Autowired
-    private ServiceManagerService serviceManagerService;
+    private CcssManagerService ccssManagerService;
 
     /**
      * Checks if there is a currently logged in user via SecurityUtils
@@ -39,7 +39,7 @@ public class ServiceManagerAuthenticationResource {
     public Response isLoggedIn() {
         User loggedInUser = SecurityUtils.getLoggedInUser();
 
-        if (!(loggedInUser instanceof ServiceManager))
+        if (!(loggedInUser instanceof CcssManager))
             return Response.ok().entity("false").build();
 
         return Response.ok().entity("true").build();
@@ -56,8 +56,9 @@ public class ServiceManagerAuthenticationResource {
     @Path("/authenticated")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAuthenticatedServiceManagerInformation() {
-        ServiceManager serviceManager = SecurityUtils.getLoggedInServiceManager();
+        CcssManager ccssManager = SecurityUtils.getLoggedInCcssManager();
 
-        return Response.ok().entity(this.serviceManagerService.getSerializedServiceManager(serviceManager)).build();
+        return Response.ok().entity(this.ccssManagerService.getSerializedCcssManager(ccssManager)).build();
     }
+
 }

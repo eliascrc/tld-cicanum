@@ -1,12 +1,11 @@
 package cr.ac.ucr.cicanum.tld.support.flexjson;
 
 import cr.ac.ucr.cicanum.tld.model.CicanumUser;
+import cr.ac.ucr.cicanum.tld.model.Hospital;
 import cr.ac.ucr.cicanum.tld.model.MedicalService;
 import cr.ac.ucr.cicanum.tld.model.ServiceManager;
 import flexjson.JSONSerializer;
 import flexjson.transformer.BooleanTransformer;
-import flexjson.transformer.DateTransformer;
-import flexjson.transformer.EnumTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -151,6 +150,8 @@ public class JSONSerializerBuilder {
 
         excludes.addAll(getGlobalExcludes());
 
+        // Need the code for opening a session in the ws
+
         tempIncludes = new LinkedList<>();
         tempIncludes.add("serviceId");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(MedicalService.class, "managedServices", tempIncludes));
@@ -171,10 +172,40 @@ public class JSONSerializerBuilder {
         serializer.transform(new BooleanTransformer(), "updateInformation");
 
         // Logs the creation of the serializer
-        logger.trace("Cicanum User Serializer {} created", serializer.toString());
+        logger.trace("Service Manager Serializer {} created", serializer.toString());
         return serializer;
     }
 
-    // TODO CCSS User Serializer
+    public static JSONSerializer getCcssManagerSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("hospitalId");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Hospital.class, "publicHospitals", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("enabled");
+        tempIncludes.add("resetPassword");
+        tempIncludes.add("updateInformation");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ServiceManager.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        serializer.transform(new BooleanTransformer(), "enabled");
+        serializer.transform(new BooleanTransformer(), "resetPassword");
+        serializer.transform(new BooleanTransformer(), "updateInformation");
+
+        // Logs the creation of the serializer
+        logger.trace("Ccss Manager Serializer {} created", serializer.toString());
+        return serializer;
+    }
 
 }

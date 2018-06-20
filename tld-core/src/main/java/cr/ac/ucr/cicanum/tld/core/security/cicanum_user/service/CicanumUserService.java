@@ -18,4 +18,11 @@ public interface CicanumUserService extends CrudService<CicanumUser, String>, Us
      */
     CicanumUser getCicanumUserByUsername(String username);
 
+    /**
+     * Serializes a cicanumuser
+     * @param cicanumUser the user to serialize
+     * @return the serialized user
+     */
+    String getSerializedCicanumUser(CicanumUser cicanumUser);
+
 }

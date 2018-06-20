@@ -6,6 +6,7 @@ import cr.ac.ucr.cicanum.tld.core.security.user.service.UserService;
 import cr.ac.ucr.cicanum.tld.model.CcssManager;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
+import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
 import cr.ac.ucr.cicanum.tld.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,11 +48,20 @@ public class CcssManagerServiceImpl extends CrudServiceImpl<CcssManager, String>
     }
 
     /**
-     * @see cr.ac.ucr.cicanum.tld.core.security.ccss_manager.service.CcssManagerService#getCcssManagerByUsername(String)
+     * @see CcssManagerService#getCcssManagerByUsername(String)
      */
     @Override
     public CcssManager getCcssManagerByUsername(String username) {
         return this.ccssManagerDao.findCcssManagerByUsername(username);
+    }
+
+    /**
+     * @see CcssManagerService#getSerializedCcssManager(CcssManager)
+     */
+    @Override
+    public String getSerializedCcssManager(CcssManager ccssManager) {
+        ccssManager = this.getCcssManagerByUsername(ccssManager.getUsername());
+        return JSONSerializerBuilder.getCcssManagerSerializer().serialize(ccssManager);
     }
 
     /**

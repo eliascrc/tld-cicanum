@@ -21,6 +21,10 @@
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/cicanumUser/loggedIn" access="permitAll()"/>
         <security:intercept-url pattern="/ws/cicanumUser/authenticated" access="hasAuthority('ROLE_CICANUM_USER')"/>
+        <security:intercept-url pattern="/ws/serviceManager/loggedIn" access="permitAll()"/>
+        <security:intercept-url pattern="/ws/serviceManager/authenticated" access="hasAuthority('ROLE_SERVICE_MANAGER')"/>
+        <security:intercept-url pattern="/ws/ccssManager/loggedIn" access="permitAll()"/>
+        <security:intercept-url pattern="/ws/ccssManager/authenticated" access="hasAuthority('ROLE_CCSS_MANAGER')"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="OPTIONS"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>

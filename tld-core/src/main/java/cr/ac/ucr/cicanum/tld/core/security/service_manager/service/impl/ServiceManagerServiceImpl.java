@@ -6,6 +6,7 @@ import cr.ac.ucr.cicanum.tld.core.security.user.service.UserService;
 import cr.ac.ucr.cicanum.tld.model.ServiceManager;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
+import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
 import cr.ac.ucr.cicanum.tld.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,11 +55,17 @@ public class ServiceManagerServiceImpl extends CrudServiceImpl<ServiceManager, S
         return this.serviceManagerDao.findServiceManagerByUsername(username);
     }
 
+    @Override
+    public String getSerializedServiceManager(ServiceManager serviceManager) {
+        serviceManager = this.getServiceManagerByUsername(serviceManager.getUsername());
+        return JSONSerializerBuilder.getServiceManagerSerializer().serialize(serviceManager);
+    }
+
     /**
      * Method that loads the UserDetails according to the username specified.
      * @param username String which specifies the user's username to search for.
      * @return The UserDetails of the user found or null if no user with that username was found.
-     * @throws UsernameNotFoundException
+     * @throws UsernameNotFoundException when the username is not found
      */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails user = this.serviceManagerDao.findServiceManagerByUsername((username.toLowerCase()));

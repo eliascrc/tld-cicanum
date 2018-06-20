@@ -20,7 +20,7 @@ public class BasicAuthenticationFailureHandler implements AuthenticationFailureH
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
-        if(request.getHeader("Origin") != null){
+        if (request.getHeader("Origin") != null) {
             response.addHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
             response.addHeader("Access-Control-Allow-Credentials", "true");
             response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");

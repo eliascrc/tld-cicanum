@@ -1,10 +1,10 @@
 package cr.ac.ucr.cicanum.tld.ws.rest;
 
+import cr.ac.ucr.cicanum.tld.core.security.cicanum_user.service.CicanumUserService;
 import cr.ac.ucr.cicanum.tld.model.CicanumUser;
-import cr.ac.ucr.cicanum.tld.model.ServiceManager;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
-import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +24,9 @@ import javax.ws.rs.core.Response;
 @Scope("request")
 @Path("/cicanumUser")
 public class CicanumUserAuthenticationResource {
+
+    @Autowired
+    private CicanumUserService cicanumUserService;
 
     /**
      * Checks if there is a currently logged in user via SecurityUtils
@@ -54,7 +57,8 @@ public class CicanumUserAuthenticationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAuthenticatedCicanumUserInformation() {
        CicanumUser cicanumUser = SecurityUtils.getLoggedInCicanumUser();
-       return Response.ok().entity(JSONSerializerBuilder.getCicanumUserSerializer().serialize(cicanumUser)).build();
+
+       return Response.ok().entity(this.cicanumUserService.getSerializedCicanumUser(cicanumUser)).build();
     }
 
 }

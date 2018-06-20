@@ -18,4 +18,11 @@ public interface ServiceManagerService extends CrudService<ServiceManager, Strin
      */
     ServiceManager getServiceManagerByUsername(String username);
 
+    /**
+     * Serializes a service manager
+     * @param serviceManager the manager to serialize
+     * @return the serialized manager
+     */
+    String getSerializedServiceManager(ServiceManager serviceManager);
+
 }
