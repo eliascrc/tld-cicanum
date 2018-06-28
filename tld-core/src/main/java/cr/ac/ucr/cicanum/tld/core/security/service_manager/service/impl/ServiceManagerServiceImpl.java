@@ -55,12 +55,6 @@ public class ServiceManagerServiceImpl extends CrudServiceImpl<ServiceManager, S
         return this.serviceManagerDao.findServiceManagerByUsername(username);
     }
 
-    @Override
-    public String getSerializedServiceManager(ServiceManager serviceManager) {
-        serviceManager = this.getServiceManagerByUsername(serviceManager.getUsername());
-        return JSONSerializerBuilder.getServiceManagerSerializer().serialize(serviceManager);
-    }
-
     /**
      * Method that loads the UserDetails according to the username specified.
      * @param username String which specifies the user's username to search for.

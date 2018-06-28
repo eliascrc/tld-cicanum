@@ -4,6 +4,7 @@ import cr.ac.ucr.cicanum.tld.core.security.ccss_manager.service.CcssManagerServi
 import cr.ac.ucr.cicanum.tld.model.CcssManager;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
+import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -57,8 +58,9 @@ public class CcssManagerAuthenticationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAuthenticatedServiceManagerInformation() {
         CcssManager ccssManager = SecurityUtils.getLoggedInCcssManager();
+        ccssManager = this.ccssManagerService.getCcssManagerByUsername(ccssManager.getUsername());
 
-        return Response.ok().entity(this.ccssManagerService.getSerializedCcssManager(ccssManager)).build();
+        return Response.ok().entity(JSONSerializerBuilder.getCcssManagerSerializer().serialize(ccssManager)).build();
     }
 
 }

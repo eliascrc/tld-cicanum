@@ -56,15 +56,6 @@ public class CicanumUserServiceImpl extends CrudServiceImpl<CicanumUser, String>
     }
 
     /**
-     * @see CicanumUserService#getSerializedCicanumUser(CicanumUser)
-     */
-    @Override
-    public String getSerializedCicanumUser(CicanumUser cicanumUser) {
-        cicanumUser = this.getCicanumUserByUsername(cicanumUser.getUsername());
-        return JSONSerializerBuilder.getCicanumUserSerializer().serialize(cicanumUser);
-    }
-
-    /**
      * Method that loads the UserDetails according to the username specified.
      * @param username String which specifies the user's username to search for.
      * @return The UserDetails of the user found or null if no user with that username was found.

@@ -18,5 +18,15 @@
         <property name="suffix" value=".jspx" />
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cr.ac.ucr.cicanum.tld.support.hibernate.HibernateSessionInterceptor"
+                  name="openSessionInViewInterceptor">
+                <property name="sessionFactory" ref="sessionFactory"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 
 </beans>

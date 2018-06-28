@@ -4,6 +4,7 @@ import cr.ac.ucr.cicanum.tld.core.security.cicanum_user.service.CicanumUserServi
 import cr.ac.ucr.cicanum.tld.model.CicanumUser;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
+import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -57,8 +58,9 @@ public class CicanumUserAuthenticationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAuthenticatedCicanumUserInformation() {
        CicanumUser cicanumUser = SecurityUtils.getLoggedInCicanumUser();
+       cicanumUser = this.cicanumUserService.getCicanumUserByUsername(cicanumUser.getUsername());
 
-       return Response.ok().entity(this.cicanumUserService.getSerializedCicanumUser(cicanumUser)).build();
+       return Response.ok().entity(JSONSerializerBuilder.getCicanumUserSerializer().serialize(cicanumUser)).build();
     }
 
 }

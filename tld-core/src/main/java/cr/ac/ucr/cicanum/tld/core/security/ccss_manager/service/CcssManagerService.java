@@ -18,11 +18,4 @@ public interface CcssManagerService extends CrudService<CcssManager, String>, Us
      */
     CcssManager getCcssManagerByUsername (String username);
 
-    /**
-     * Serializes a ccss manager
-     * @param ccssManager the manager to serialize
-     * @return the serialized manager
-     */
-    String getSerializedCcssManager(CcssManager ccssManager);
-
 }

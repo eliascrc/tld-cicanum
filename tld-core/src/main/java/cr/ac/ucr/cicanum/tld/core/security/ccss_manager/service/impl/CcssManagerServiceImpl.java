@@ -56,15 +56,6 @@ public class CcssManagerServiceImpl extends CrudServiceImpl<CcssManager, String>
     }
 
     /**
-     * @see CcssManagerService#getSerializedCcssManager(CcssManager)
-     */
-    @Override
-    public String getSerializedCcssManager(CcssManager ccssManager) {
-        ccssManager = this.getCcssManagerByUsername(ccssManager.getUsername());
-        return JSONSerializerBuilder.getCcssManagerSerializer().serialize(ccssManager);
-    }
-
-    /**
      * Method that loads the UserDetails according to the username specified.
      * @param username String which specifies the user's username to search for.
      * @return The UserDetails of the user found or null if no user with that username was found.

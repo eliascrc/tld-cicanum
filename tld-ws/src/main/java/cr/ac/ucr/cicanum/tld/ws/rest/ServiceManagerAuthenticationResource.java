@@ -4,6 +4,7 @@ import cr.ac.ucr.cicanum.tld.core.security.service_manager.service.ServiceManage
 import cr.ac.ucr.cicanum.tld.model.ServiceManager;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
+import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -57,7 +58,8 @@ public class ServiceManagerAuthenticationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAuthenticatedServiceManagerInformation() {
         ServiceManager serviceManager = SecurityUtils.getLoggedInServiceManager();
+        serviceManager = this.serviceManagerService.getServiceManagerByUsername(serviceManager.getUsername());
 
-        return Response.ok().entity(this.serviceManagerService.getSerializedServiceManager(serviceManager)).build();
+        return Response.ok().entity(JSONSerializerBuilder.getServiceManagerSerializer().serialize(serviceManager)).build();
     }
 }
