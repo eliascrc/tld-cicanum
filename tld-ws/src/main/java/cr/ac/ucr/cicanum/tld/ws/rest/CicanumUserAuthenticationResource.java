@@ -4,14 +4,14 @@ import cr.ac.ucr.cicanum.tld.core.security.cicanum_user.service.CicanumUserServi
 import cr.ac.ucr.cicanum.tld.model.CicanumUser;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
+import cr.ac.ucr.cicanum.tld.support.exceptions.IncorrectPasswordException;
 import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -61,6 +61,34 @@ public class CicanumUserAuthenticationResource {
        cicanumUser = this.cicanumUserService.getCicanumUserByUsername(cicanumUser.getUsername());
 
        return Response.ok().entity(JSONSerializerBuilder.getCicanumUserSerializer().serialize(cicanumUser)).build();
+    }
+
+    /**
+     * Resets a Cicanum User's password
+     *
+     * @param currentPassword   the user's current password, for security purposes
+     * @param newPassword       the password to be set
+     * @return 200 if the password is correctly changes, 400 if either parameter is empty or null, 401 if the received
+     * currentPassword does not match the user's stored password.
+     */
+    @POST
+    @Path("/resetPassword")
+    public Response resetPassword(@FormParam("currentPassword") String currentPassword,
+                                  @FormParam("newPassword") String newPassword) {
+        if(StringUtils.isEmpty(currentPassword) || StringUtils.isEmpty(newPassword))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        CicanumUser cicanumUser = this.cicanumUserService.getCicanumUserByUsername(SecurityUtils.getLoggedInCicanumUser().getUsername());
+
+        try {
+            this.cicanumUserService.resetPassword(cicanumUser, currentPassword, newPassword);
+        } catch(IllegalArgumentException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch(IncorrectPasswordException e){
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        return Response.ok().build();
     }
 
 }

@@ -18,4 +18,13 @@ public interface CicanumUserService extends CrudService<CicanumUser, String>, Us
      */
     CicanumUser getCicanumUserByUsername(String username);
 
+    /**
+     * Provides the business logic to reset a user's password
+     *
+     * @param cicanumUser       the user whose password will be updated
+     * @param currentPassword   the user's current password, requested to make sure they should be authorized to change their password
+     * @param newPassword       newPassword the string to be set as the user's password
+     */
+    void resetPassword(CicanumUser cicanumUser, String currentPassword, String newPassword);
+
 }

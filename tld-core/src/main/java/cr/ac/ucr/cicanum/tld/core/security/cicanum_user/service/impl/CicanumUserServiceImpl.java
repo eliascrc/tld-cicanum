@@ -6,6 +6,7 @@ import cr.ac.ucr.cicanum.tld.core.security.user.service.UserService;
 import cr.ac.ucr.cicanum.tld.model.CicanumUser;
 import cr.ac.ucr.cicanum.tld.model.User;
 import cr.ac.ucr.cicanum.tld.support.SecurityUtils;
+import cr.ac.ucr.cicanum.tld.support.exceptions.IncorrectPasswordException;
 import cr.ac.ucr.cicanum.tld.support.flexjson.JSONSerializerBuilder;
 import cr.ac.ucr.cicanum.tld.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,24 @@ public class CicanumUserServiceImpl extends CrudServiceImpl<CicanumUser, String>
         cicanumUser.setEnabled(true);
 
         return super.create(cicanumUser);
+    }
+
+    /**
+     * @see cr.ac.ucr.cicanum.tld.core.security.cicanum_user.service.CicanumUserService#resetPassword(CicanumUser, String, String)
+     */
+    @Override
+    public void resetPassword(CicanumUser cicanumUser, String currentPassword, String newPassword) {
+
+        // See if the received current password is correct.
+        // If not, an exception will be thrown and caught in the WS, to return the appropriate error code.
+        if(!this.passwordEncoder.encode(currentPassword).equals(cicanumUser.getPassword()))
+            throw new IncorrectPasswordException();
+
+        // This will throw the approrpiate exceptions if the password is not valid
+        SecurityUtils.validatePassword(newPassword);
+
+        cicanumUser.setPassword(this.passwordEncoder.encode(newPassword));
+        this.cicanumUserDao.update(cicanumUser);
     }
 
 }
