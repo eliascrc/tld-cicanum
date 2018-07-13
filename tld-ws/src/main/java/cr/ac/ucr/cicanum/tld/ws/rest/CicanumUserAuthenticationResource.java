@@ -68,7 +68,7 @@ public class CicanumUserAuthenticationResource {
      *
      * @param currentPassword   the user's current password, for security purposes
      * @param newPassword       the password to be set
-     * @return 200 if the password is correctly changes, 400 if either parameter is empty or null, 401 if the received
+     * @return 200 if the password is correctly changed, 400 if either parameter is empty or null, 401 if the received
      * currentPassword does not match the user's stored password.
      */
     @POST
